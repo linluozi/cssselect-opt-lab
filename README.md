@@ -77,6 +77,15 @@ bracket, 5000-char, 500-class, non-ASCII, emoji, pseudo-elements…), crossed wi
 `sha256(translator|prefix|translate_pseudo_elements|css)`. 6800 distinct inputs,
 13600 XPath-level comparisons, 0 mismatches.
 
+## Independent verification (2026-11-15)
+
+A separate re-run in a fresh clone and a separately built patched tree reproduced
+the headline claims: upstream tests `46 passed, 1 xfailed, 81 subtests`; diff test
+`6800` distinct inputs / `0` mismatches; `spider` **3.709x** (medium) and
+**3.950x** (large); no-reuse control **0.981x**. Commands, environment and exact
+outputs are in [VERIFY.md](VERIFY.md); raw samples in `benchmark/verify-20261115/`.
+The four-tag matrix and the cProfile attribution were not re-run by the verifier.
+
 ## Reproduce
 
 ```bash

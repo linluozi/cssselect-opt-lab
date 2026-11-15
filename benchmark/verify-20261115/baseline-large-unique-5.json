@@ -1,0 +1,12 @@
+{
+  "impl": "baseline",
+  "scale": "large",
+  "mode": "unique",
+  "selectors": 743,
+  "pages": 1,
+  "translations": 743,
+  "rep": 5,
+  "seconds": 0.023717203177511692,
+  "seconds_per_translation": 3.192086564941008e-05,
+  "cache": null
+}

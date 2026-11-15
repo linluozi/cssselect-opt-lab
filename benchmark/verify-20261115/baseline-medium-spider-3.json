@@ -1,0 +1,12 @@
+{
+  "impl": "baseline",
+  "scale": "medium",
+  "mode": "spider",
+  "selectors": 400,
+  "pages": 12,
+  "translations": 4800,
+  "rep": 3,
+  "seconds": 0.16123460978269577,
+  "seconds_per_translation": 3.359054370472828e-05,
+  "cache": null
+}
