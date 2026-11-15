@@ -13,8 +13,9 @@ and upstream `scrapy/cssselect@1730a489cc4f0962ff42560c6fcb3a93b9c81ada`.
 3. `benchmark/bench.py` on `medium`/`large` × `spider`, and the `large` ×
    `unique` no-reuse control, against both the pristine and the patched tree.
 
-Not re-run: the cProfile attribution (73.8%) and the four-release-tag matrix in
-`benchmark/version_matrix.json`. Those claims are outside this verification.
+Spot-checked: one of the four release tags (`v1.6.0`), see below.
+Not re-run: the cProfile attribution (73.8%) and the other three tags in
+`benchmark/version_matrix.json`.
 
 ## Setup
 
@@ -66,11 +67,33 @@ Commands (one per arm; `--raw-dir /tmp/vraw` for the verification pass):
 /tmp/csv-venv/bin/python benchmark/bench.py --impl optimized --cssselect-path /tmp/csspat --scale large --mode spider --raw-dir /tmp/vraw
 ```
 
+## Release-tag spot check: v1.6.0
+
+`patch.diff` applied cleanly to a fresh `--depth=1` clone of tag `v1.6.0`
+(`805705c5a204721d3c486250377a756bd6fa54a5`), the upstream suite passed, and the
+`small`/`spider` benchmark reproduced the matrix entry:
+
+```
+$ git clone --depth=1 --branch v1.6.0 git@github-linluozi:scrapy/cssselect.git /tmp/cs16
+$ cp -r /tmp/cs16 /tmp/cs16p && cd /tmp/cs16p && git apply /tmp/cs/patch.diff
+$ /tmp/csv-venv/bin/python -m pytest cssselect tests docs -q -p no:cacheprovider
+27 passed in 0.61s
+```
+
+| arm | median (7 reps, 3 warmups) | speedup |
+| --- | --- | --- |
+| pristine v1.6.0 | 26.0308 ms | — |
+| v1.6.0 + patch | 8.6742 ms | **3.001x** |
+
+The matrix records 25.6942 ms / 8.6876 ms = 2.9576x for the same tag; the two
+runs differ by 1.5%, inside the run-to-run spread. Raw samples for this tag are
+in `benchmark/verify-20261115/v1.6.0/`. The other three tags were not re-run.
+
 ## Verdict
 
 The published claims reproduce within run-to-run noise: the `spider` speedups
 are 3.709x (medium) and 3.950x (large) versus 3.709x/3.915x in the README, the
 no-reuse control is 0.981x (README 0.962x), the diff test still reports 6800
-distinct inputs and 0 mismatches, and the patched tree passes the same upstream
-suite. Nothing here changes the README's honest boundary: the gain requires
+distinct inputs and 0 mismatches, the patched tree passes the same upstream
+suite, and the v1.6.0 tag reproduces at 3.001x versus 2.958x in the matrix. Nothing here changes the README's honest boundary: the gain requires
 reusing a selector list across pages; with no reuse the patch is a small loss.
