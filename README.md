@@ -82,7 +82,7 @@ bracket, 5000-char, 500-class, non-ASCII, emoji, pseudo-elements…), crossed wi
 ```bash
 git clone --depth=1 git@github-linluozi:scrapy/cssselect.git /tmp/enoch-cssselect
 python3 -m venv /tmp/enoch-venv && /tmp/enoch-venv/bin/pip install pytest hypothesis "lxml>=4.4" sybil
-cp -r src/cssselect /tmp/enoch-cssselect/cssselect   # patched source
+rm -rf /tmp/enoch-cssselect/cssselect && cp -r src/cssselect /tmp/enoch-cssselect/cssselect   # patched source
 cd /tmp/enoch-cssselect && /tmp/enoch-venv/bin/python -m pytest cssselect tests docs -q -p no:cacheprovider
 cd - && /tmp/enoch-venv/bin/python tests/test_diff.py
 /tmp/enoch-venv/bin/python benchmark/bench.py --impl optimized --cssselect-path /tmp/enoch-cssselect --scale large --mode spider --raw-dir benchmark/raw
