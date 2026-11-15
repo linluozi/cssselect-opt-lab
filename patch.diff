@@ -1,0 +1,33 @@
+diff --git a/cssselect/parser.py b/cssselect/parser.py
+index 4c5349a..4432646 100644
+--- a/cssselect/parser.py
++++ b/cssselect/parser.py
+@@ -547,6 +547,28 @@ _class_re = re.compile(
+ )
+ 
+ 
++def _memoize_parse(fn):
++    """Cache ``parse`` results while still returning a fresh list per call.
++
++    :func:`functools.lru_cache` would hand out the *same* list object on a
++    cache hit, and cssselect callers are allowed to mutate the list they get
++    back.  The wrapper therefore caches internally and copies the cached
++    sequence into a new list for every caller.
++    """
++    from functools import lru_cache, wraps
++
++    cached = lru_cache(maxsize=4096)(fn)
++
++    @wraps(fn)
++    def wrapper(css: str) -> list[Selector]:
++        return list(cached(css))
++
++    wrapper.cache_clear = cached.cache_clear  # type: ignore[attr-defined]
++    wrapper.cache_info = cached.cache_info  # type: ignore[attr-defined]
++    return wrapper
++
++
++@_memoize_parse
+ def parse(css: str) -> list[Selector]:
+     """Parse a CSS *group of selectors*.
+ 

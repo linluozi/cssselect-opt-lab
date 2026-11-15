@@ -1,0 +1,16 @@
+{
+  "impl": "optimized",
+  "scale": "small",
+  "mode": "spider",
+  "selectors": 150,
+  "pages": 6,
+  "translations": 900,
+  "rep": 0,
+  "seconds": 0.009066433645784855,
+  "seconds_per_translation": 1.0073815161983172e-05,
+  "cache": {
+    "hits": 750,
+    "misses": 150,
+    "maxsize": 4096
+  }
+}

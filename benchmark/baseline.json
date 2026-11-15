@@ -1,0 +1,98 @@
+{
+  "upstream": "https://github.com/scrapy/cssselect",
+  "base_commit": "1730a489cc4f0962ff42560c6fcb3a93b9c81ada",
+  "implementation": "pristine upstream checkout at /tmp/base-css",
+  "environment": {
+    "cpu": "AMD EPYC 7K62 48-Core Processor (4 vCPU)",
+    "memory_kb": 3812352,
+    "python": "3.12.3",
+    "python_impl": "CPython",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+    "seed": null,
+    "note": "Workload is deterministic: the same frozen selector corpus is replayed in the same order; no randomness is involved, so no seed is required.",
+    "command": "python benchmark/bench.py --impl {impl} --cssselect-path {path} --scale {scale} --mode {mode} --raw-dir benchmark/raw"
+  },
+  "upstream_tests": {
+    "command": "python -m pytest cssselect tests docs -q -p no:cacheprovider",
+    "pristine": "46 passed, 1 xfailed, 81 subtests passed in 3.33s",
+    "patched": "46 passed, 1 xfailed, 81 subtests passed in 2.82s"
+  },
+  "scales": {
+    "spider": {
+      "small": {
+        "selectors": 150,
+        "pages": 6,
+        "translations_per_rep": 900,
+        "median_ms": 26.0254,
+        "p25_ms": 25.9068,
+        "p75_ms": 26.2191,
+        "min_ms": 25.7755,
+        "max_ms": 26.9663,
+        "rel_stdev": 0.01582,
+        "speedup_vs_baseline": 1.0
+      },
+      "medium": {
+        "selectors": 400,
+        "pages": 12,
+        "translations_per_rep": 4800,
+        "median_ms": 164.4749,
+        "p25_ms": 162.6453,
+        "p75_ms": 166.923,
+        "min_ms": 162.0456,
+        "max_ms": 170.091,
+        "rel_stdev": 0.01864,
+        "speedup_vs_baseline": 1.0
+      },
+      "large": {
+        "selectors": 743,
+        "pages": 20,
+        "translations_per_rep": 14860,
+        "median_ms": 474.5857,
+        "p25_ms": 473.5313,
+        "p75_ms": 475.1537,
+        "min_ms": 472.9833,
+        "max_ms": 487.733,
+        "rel_stdev": 0.01097,
+        "speedup_vs_baseline": 1.0
+      }
+    },
+    "unique": {
+      "small": {
+        "selectors": 150,
+        "pages": 1,
+        "translations_per_rep": 150,
+        "median_ms": 4.3947,
+        "p25_ms": 4.3651,
+        "p75_ms": 4.4038,
+        "min_ms": 4.3469,
+        "max_ms": 4.4784,
+        "rel_stdev": 0.00983,
+        "speedup_vs_baseline": 1.0
+      },
+      "medium": {
+        "selectors": 400,
+        "pages": 1,
+        "translations_per_rep": 400,
+        "median_ms": 13.5538,
+        "p25_ms": 13.3922,
+        "p75_ms": 13.641,
+        "min_ms": 13.2636,
+        "max_ms": 13.8167,
+        "rel_stdev": 0.01408,
+        "speedup_vs_baseline": 1.0
+      },
+      "large": {
+        "selectors": 743,
+        "pages": 1,
+        "translations_per_rep": 743,
+        "median_ms": 23.5333,
+        "p25_ms": 23.422,
+        "p75_ms": 23.818,
+        "min_ms": 23.4123,
+        "max_ms": 24.1364,
+        "rel_stdev": 0.01375,
+        "speedup_vs_baseline": 1.0
+      }
+    }
+  }
+}

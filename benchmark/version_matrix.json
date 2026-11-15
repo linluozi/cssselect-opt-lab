@@ -1,0 +1,56 @@
+{
+  "base_commit": "1730a489cc4f0962ff42560c6fcb3a93b9c81ada",
+  "head_commit": "1730a489cc4f0962ff42560c6fcb3a93b9c81ada",
+  "method": "patch.diff applied to a fresh --depth=1 clone of each release tag; upstream tests re-run; small/spider benchmark re-run against the stashed (pristine) and the patched tree in the same checkout.",
+  "note": "All four tags are 1.x; this is a cross-release replay, not a cross-major-version claim.",
+  "versions": [
+    {
+      "tag": "v1.3.0",
+      "commit": "e99c506b8e8be0753250622633df8a68dc76268e",
+      "patch_apply": "OK",
+      "upstream_tests": "22 passed in 0.42s",
+      "tests_command": "python -m pytest cssselect tests docs -q -p no:cacheprovider",
+      "bench_mode": "small/spider",
+      "baseline_ms": 38.2411,
+      "optimized_ms": 19.2057,
+      "speedup": 1.9911,
+      "guard": "enabled"
+    },
+    {
+      "tag": "v1.4.0",
+      "commit": "743c6e524ee534ed34fd4d4121ee629fee5cddec",
+      "patch_apply": "OK",
+      "upstream_tests": "22 passed in 0.42s",
+      "tests_command": "python -m pytest cssselect tests docs -q -p no:cacheprovider",
+      "bench_mode": "small/spider",
+      "baseline_ms": 25.3836,
+      "optimized_ms": 8.5752,
+      "speedup": 2.9601,
+      "guard": "enabled"
+    },
+    {
+      "tag": "v1.5.0",
+      "commit": "a5057bbf12ddc605354f5bee123ae79b9c980703",
+      "patch_apply": "OK",
+      "upstream_tests": "26 passed in 0.56s",
+      "tests_command": "python -m pytest cssselect tests docs -q -p no:cacheprovider",
+      "bench_mode": "small/spider",
+      "baseline_ms": 25.1863,
+      "optimized_ms": 8.3797,
+      "speedup": 3.0056,
+      "guard": "enabled"
+    },
+    {
+      "tag": "v1.6.0",
+      "commit": "805705c5a204721d3c486250377a756bd6fa54a5",
+      "patch_apply": "OK",
+      "upstream_tests": "27 passed in 0.62s",
+      "tests_command": "python -m pytest cssselect tests docs -q -p no:cacheprovider",
+      "bench_mode": "small/spider",
+      "baseline_ms": 25.6942,
+      "optimized_ms": 8.6876,
+      "speedup": 2.9576,
+      "guard": "enabled"
+    }
+  ]
+}
